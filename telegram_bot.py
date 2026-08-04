@@ -582,8 +582,12 @@ Anyone who clicks it will be tracked!
         )
     
     def run(self):
-        print("🚀 Bot is running...")
+    print("🚀 Bot is running...")
+    try:
         self.application.run_polling(allowed_updates=Update.ALL_TYPES)
+    except Exception as e:
+        print(f"❌ Bot error: {e}")
+        raise
 
 if __name__ == '__main__':
     if not BOT_TOKEN:
